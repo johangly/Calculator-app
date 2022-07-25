@@ -1,0 +1,313 @@
+:root {
+  /* theme 1 */
+  --color-1: hsl(222, 26%, 31%);
+  --color-2: hsl(223, 31%, 20%);
+  --color-3: hsl(224, 36%, 15%);
+  --color-4: hsl(225, 21%, 49%);
+  --color-5: hsl(224, 28%, 35%);
+  --color-6: hsl(6, 63%, 50%);
+  --color-7: hsl(6, 70%, 34%);
+  --color-8: hsl(30, 25%, 89%);
+  --color-10: hsl(28, 16%, 65%);
+  --color-11: hsl(221, 14%, 31%);
+  --color-12: hsl(0, 0%, 100%);
+  /* --color-13: hsl(0, 0%, 100%); */
+  --font-1: 'League Spartan', sans-serif;
+  --buttonHeight: 40px;
+  --buttonWidth: 65px;
+  --buttonFontSize: 26px;
+  --buttonHoverBrightness: brightness(120%);
+}
+
+html {
+  font-size: 32px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #232323;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+input,
+button {
+  font-size: 1rem;
+  font-family: var(--font-1);
+  font-weight: 700;
+}
+
+button {
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-1);
+  width: 100%;
+  min-height: 100vh;
+}
+
+.calculator {
+  padding: 15px;
+  /* background-color: var(--color-1); */
+  width: 380px;
+  height: 450px;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+/* ? HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  color: var(--color-12)
+}
+
+.header .header__calc {
+  font-size: 20px;
+}
+
+.theme {
+  display: grid;
+  grid-template-columns: repeat(2, 60px);
+  grid-template-rows: repeat(2, 20px);
+}
+
+.theme__theme {
+  font-size: 9px;
+  text-transform: uppercase;
+  grid-column: 1/2;
+  grid-row: 2/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme__number {
+  font-size: 12px;
+  grid-column: 2/2;
+  grid-row: 1/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 5px;
+}
+
+.check__theme {
+  grid-column: 2/2;
+  grid-row: 2/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 20px;
+  background-color: var(--color-2);
+}
+.check__theme > button{
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  z-index: 0;
+  height: 100%;
+}
+.ball{
+  width: 15px;
+  height: 15px;
+  background-color: var(--color-6);
+  position: absolute;
+  border-radius: 50%;
+  transition: ease all 200ms;
+  left: 6%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  z-index: 100;
+}
+
+.screen {
+  height: 20%;
+  background-color: var(--color-3);
+  border-radius: 5px;
+  color: var(--color-12);
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  align-items: center;
+  padding: 0 20px;
+  line-height: 0;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ? BUTTONS */
+.buttons {
+  height: 80%;
+  margin-top: 15px;
+  padding: 12px;
+  background-color: var(--color-2);
+  border-radius: 5px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.buttons * {
+  font-size: var(--buttonFontSize);
+}
+
+.buttons * :hover {
+  filter: var(--buttonHoverBrightness);
+}
+
+.numbers {
+  /* background-color: #040; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column: 1/4;
+  grid-row: 1/4;
+  grid-gap: 10px;
+  padding: 5px;
+}
+
+.numbers>button {
+  background-color: var(--color-8);
+  border: none;
+  width: var(--buttonWidth);
+  height: var(--buttonHeight);
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-11);
+  box-shadow: 0 3px 0px 0px var(--color-10);
+}
+
+.numbers button:hover {
+  filter: var(--buttonHoverBrightness);
+}
+
+.symbols-1 {
+  display: flex;
+  flex-direction: column;
+  /* background-color: rgb(26, 79, 145); */
+  grid-column: 4/5;
+  grid-row: 1/5;
+  /* grid-column-gap: 12px; */
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 10px;
+  padding: 5px;
+}
+
+.symbols-1>button {
+  background-color: var(--color-8);
+  border: none;
+  width: var(--buttonWidth);
+  height: var(--buttonHeight);
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-11);
+  box-shadow: 0 3px 0px 0px var(--color-10);
+}
+
+/* DEL button */
+.symbols-1 button:nth-child(01) {
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: var(--color-4);
+  color: #fff;
+  box-shadow: 0 3px 0px 0px var(--color-5);
+}
+
+.symbols-2 {
+  display: flex;
+  grid-column: 1/4;
+  grid-row: 4/5;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-gap: 10px;
+  padding: 5px;
+}
+
+.symbols-2>button {
+  background-color: var(--color-8);
+  width: var(--buttonWidth);
+  border: none;
+  height: var(--buttonHeight);
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-11);
+  box-shadow: 0 3px 0px 0px var(--color-10);
+}
+
+.functions {
+  display: flex;
+  grid-column: 1/5;
+  grid-row: 5/6;
+  grid-gap: 10px;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.functions>button {
+  width: 46%;
+  background-color: var(--color-8);
+  border: none;
+  height: var(--buttonHeight);
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-11);
+  box-shadow: 0 3px 0px 0px var(--color-10);
+}
+
+/* RESET button */
+.functions button:nth-child(01) {
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: var(--color-4);
+  color: #fff;
+  box-shadow: 0 3px 0px 0px var(--color-5);
+}
+
+/* = button */
+.functions button:nth-child(02) {
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: var(--color-6);
+  color: #fff;
+  box-shadow: 0 3px 0px 0px var(--color-7);
+}
+
+/* TODO:separar los botones de altura */
