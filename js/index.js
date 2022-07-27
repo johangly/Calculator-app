@@ -250,16 +250,16 @@ $substract_btn.addEventListener("click", (e) => {
 
 $del_btn.addEventListener("click", (e) => {
   if (error === false) {
-    console.log(typeof DATA)
-    console.log(DATA)
     btn_res_active = false
     let del = DATA.toString().split(" ")
     if (del[del.length - 1] === "") {
       del = del.slice(0,-2).join(" ")
     } else {
-      del = del.slice(0,-1).join(" ")
+      lastNum = del[del.length - 1]
+      lastNum = lastNum.slice(0, -1)
+      del[del.length - 1] = lastNum;
+      del = del.join(" ")
     }
-    console.log(del,"del")
     DATA = del
     screen.innerHTML = DATA
   } else {
@@ -278,7 +278,7 @@ $result_btn.addEventListener("click", () => {
   let a;
   let b;
   let signo;
-
+  console.log(typeof DATA,"DATA")
   //? if que verifica si hay un error en los datos a calcular
   if ((result[result.length - 1] === "+") || (result[result.length - 1] === "-") || (result[result.length - 1] === "/") || (result[result.length - 1] === "*") || (result[result.length - 1] === "")) {
     error = true
@@ -329,12 +329,17 @@ $result_btn.addEventListener("click", () => {
       error = true
     } else {
       screen.innerHTML = a
+      // let toLocalStorage = a
+      localStorage.setItem(`${localStorage.length + 1}`, `${DATA} = ${a}`);
+      // console.log(localStorage, "localStorage")
+      // console.log(localStorage.length + 1,"localStorage")
       DATA = a
       btn_res_active = true
+      // console.log(toLocalStorage)
+      // console.log(typeof toLocalStorage)
     }
   } else {
     a = 0
     b = 0
   }
 })
-// TODO:guardar un historial de calculos en el local storage

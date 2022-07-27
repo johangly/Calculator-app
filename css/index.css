@@ -16,7 +16,7 @@
   --buttonHeight: 40px;
   --buttonWidth: 65px;
   --buttonFontSize: 26px;
-  --buttonHoverBrightness: brightness(120%);
+  --buttonHoverBrightness: brightness(150%);
 }
 
 html {
@@ -189,7 +189,8 @@ button {
 .numbers>button {
   background-color: var(--color-8);
   border: none;
-  width: var(--buttonWidth);
+  max-width: var(--buttonWidth);
+  width: 100%;
   height: var(--buttonHeight);
   margin: auto;
   border-radius: 5px;
@@ -221,7 +222,8 @@ button {
 .symbols-1>button {
   background-color: var(--color-8);
   border: none;
-  width: var(--buttonWidth);
+  max-width: var(--buttonWidth);
+  width: 100%;
   height: var(--buttonHeight);
   margin: auto;
   border-radius: 5px;
@@ -254,7 +256,8 @@ button {
 
 .symbols-2>button {
   background-color: var(--color-8);
-  width: var(--buttonWidth);
+  max-width: var(--buttonWidth);
+  width: 100%;
   border: none;
   height: var(--buttonHeight);
   margin: auto;
