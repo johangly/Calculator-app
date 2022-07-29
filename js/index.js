@@ -1,33 +1,92 @@
 //? variables
 //* calc variables
-var DATA = 0;
-var error = false;
-var btn_res_active = false
+let DATA = 0;
+let error = false;
+let btn_res_active = false
 //* change theme variables
 
-var root = document.documentElement;
-var $themeButton_1 = document.querySelector(".theme-1")
-var $themeButton_2 = document.querySelector(".theme-2")
-var $themeButton_3 = document.querySelector(".theme-3")
-var $theme_ball= document.querySelector(".ball")
+let root = document.documentElement;
+let $themeButton_1 = document.querySelector(".theme-1")
+let $themeButton_2 = document.querySelector(".theme-2")
+let $themeButton_3 = document.querySelector(".theme-3")
+let $theme_ball= document.querySelector(".ball")
 
 //* numberPad variables
 // numbers
-var $numbersPad = document.querySelectorAll(".btn")
-var $zero_btn = document.querySelector(".btn_zero")
-var $dot_btn = document.querySelector(".btn_dot")
+let $numbersPad = document.querySelectorAll(".btn")
+let $zero_btn = document.querySelector(".btn_zero")
+let $dot_btn = document.querySelector(".btn_dot")
 // functions
-var $reset_btn = document.querySelector(".btn_reset")
-var $add_btn = document.querySelector(".btn_add")
-var $result_btn = document.querySelector(".btn_result")
-var $substract_btn = document.querySelector(".btn_subtract");
-var $del_btn = document.querySelector(".btn_del");
-var $multiply_btn = document.querySelector(".btn_multiply");
-var $split_btn = document.querySelector(".btn_split");
+let $reset_btn = document.querySelector(".btn_reset")
+let $add_btn = document.querySelector(".btn_add")
+let $result_btn = document.querySelector(".btn_result")
+let $substract_btn = document.querySelector(".btn_subtract");
+let $del_btn = document.querySelector(".btn_del");
+let $multiply_btn = document.querySelector(".btn_multiply");
+let $split_btn = document.querySelector(".btn_split");
 
 //* screen variables
 
-var screen = document.querySelector(".screen")
+let screen = document.querySelector(".screen")
+
+//* registration variables
+
+let $registration = document.querySelector(".registration")
+let $menuBtn = document.querySelector(".menu__btn")
+let $registrationContainer = document.querySelector(".registration__container")
+let $clearRegistrationBtn = document.querySelector(".clearRegistry__btn")
+//! registration event
+
+$menuBtn.addEventListener("click", (e) => {
+  if ($registration.style.transform === "translateX(0%)") {
+    $registration.style.transform = "translateX(100%)"
+  } else {
+    $registration.style.transform = "translateX(0%)"
+
+  }
+})
+
+//! delete registration
+localStorage.removeItem("2")
+
+$clearRegistrationBtn.addEventListener("click", function clearRegistry(e) {
+  let sortedLocalStorage = Object.keys(localStorage)
+  let local = sortedLocalStorage.sort((a, b) => a - b)
+
+  for (let i = 0; i < local.length; i++) {
+
+    if (local[i]) {
+      localStorage.removeItem(`${local[i]}`)
+    }
+  }
+  loadLocalStorage();
+
+})
+
+//! load registration
+
+
+function loadLocalStorage() {
+  $registrationContainer.innerHTML = "";
+  let sortedLocalStorage = Object.keys(localStorage)
+  let local = sortedLocalStorage.sort((a, b) => a - b)
+  for (let i = 0; i < local.length; i++) {
+    let element = localStorage.getItem(`${local[i]}`);
+    if (element) {
+      let span = document.createElement("span")
+      span.innerHTML = element
+      span.classList.add(`calc-${i}`);
+      $registrationContainer.appendChild(span)
+    }
+  }
+  // if ($registrationContainer.innerHTML === "") {
+  //   $registrationContainer.style.display = "none"
+  // } else {
+  //   $registrationContainer.style.display = "flex"
+  // }
+}
+loadLocalStorage();
+
 
 //! change theme functions
 
@@ -278,7 +337,6 @@ $result_btn.addEventListener("click", () => {
   let a;
   let b;
   let signo;
-  console.log(typeof DATA,"DATA")
   //? if que verifica si hay un error en los datos a calcular
   if ((result[result.length - 1] === "+") || (result[result.length - 1] === "-") || (result[result.length - 1] === "/") || (result[result.length - 1] === "*") || (result[result.length - 1] === "")) {
     error = true
@@ -331,15 +389,14 @@ $result_btn.addEventListener("click", () => {
       screen.innerHTML = a
       // let toLocalStorage = a
       localStorage.setItem(`${localStorage.length + 1}`, `${DATA} = ${a}`);
-      // console.log(localStorage, "localStorage")
-      // console.log(localStorage.length + 1,"localStorage")
       DATA = a
       btn_res_active = true
-      // console.log(toLocalStorage)
-      // console.log(typeof toLocalStorage)
+      loadLocalStorage();
     }
   } else {
     a = 0
     b = 0
   }
 })
+
+// TODO: cuando se usa un traductor este elimina los espacios en los signos, forzar
