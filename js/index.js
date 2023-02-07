@@ -2,7 +2,8 @@
 //* calc variables
 let DATA = 0;
 let error = false;
-let btn_res_active = false
+let btn_res_active = false;
+let history = [];
 //* change theme variables
 
 let root = document.documentElement;
@@ -47,18 +48,11 @@ $menuBtn.addEventListener("click", (e) => {
 })
 
 //! delete registration
-localStorage.removeItem("2")
 
 $clearRegistrationBtn.addEventListener("click", function clearRegistry(e) {
-  let sortedLocalStorage = Object.keys(localStorage)
-  let local = sortedLocalStorage.sort((a, b) => a - b)
-
-  for (let i = 0; i < local.length; i++) {
-
-    if (local[i]) {
-      localStorage.removeItem(`${local[i]}`)
-    }
-  }
+  history = [];
+  let set = JSON.stringify(history);
+  localStorage.setItem(`CALCULATOR_V1`, set);
   loadLocalStorage();
 
 })
@@ -68,24 +62,17 @@ $clearRegistrationBtn.addEventListener("click", function clearRegistry(e) {
 
 function loadLocalStorage() {
   $registrationContainer.innerHTML = "";
-  let sortedLocalStorage = Object.keys(localStorage)
-  let local = sortedLocalStorage.sort((a, b) => a - b)
-  for (let i = 0; i < local.length; i++) {
-    let element = localStorage.getItem(`${local[i]}`);
+  history = JSON.parse(localStorage.getItem(`CALCULATOR_V1`));
+
+  for (let i = 0; i < history.length; i++) {
+    const element = history[i];
     if (element) {
-      let span = document.createElement("span")
-      span.innerHTML = element
-      span.classList.add(`calc-${i}`);
+      let span = document.createElement("span");
+      span.textContent = element;
       $registrationContainer.appendChild(span)
     }
   }
-  // if ($registrationContainer.innerHTML === "") {
-  //   $registrationContainer.style.display = "none"
-  // } else {
-  //   $registrationContainer.style.display = "flex"
-  // }
 }
-loadLocalStorage();
 
 
 //! change theme functions
@@ -387,8 +374,9 @@ $result_btn.addEventListener("click", () => {
       error = true
     } else {
       screen.innerHTML = a
-      // let toLocalStorage = a
-      localStorage.setItem(`${localStorage.length + 1}`, `${DATA} = ${a}`);
+      history.push(`${DATA} = ${a}`);
+      let set = JSON.stringify(history);
+      localStorage.setItem(`CALCULATOR_V1`, set);
       DATA = a
       btn_res_active = true
       loadLocalStorage();
@@ -398,5 +386,6 @@ $result_btn.addEventListener("click", () => {
     b = 0
   }
 })
+loadLocalStorage();
 
 // TODO: cuando se usa un traductor este elimina los espacios en los signos, forzar
