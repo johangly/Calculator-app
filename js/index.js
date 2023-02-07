@@ -62,17 +62,22 @@ $clearRegistrationBtn.addEventListener("click", function clearRegistry(e) {
 
 function loadLocalStorage() {
   $registrationContainer.innerHTML = "";
-  history = JSON.parse(localStorage.getItem(`CALCULATOR_V1`));
-  console.log(history)
-  if(history){
-    for (let i = 0; i < history.length; i++) {
-      const element = history[i];
-      if (element) {
-        let span = document.createElement("span");
-        span.textContent = element;
-        $registrationContainer.appendChild(span)
+  let storage = localStorage.getItem(`CALCULATOR_V1`);
+  if(storage){
+    history = JSON.parse(localStorage.getItem(`CALCULATOR_V1`));
+    if(history){
+      for (let i = 0; i < history.length; i++) {
+        const element = history[i];
+        if (element) {
+          let span = document.createElement("span");
+          span.textContent = element;
+          $registrationContainer.appendChild(span)
+        }
       }
     }
+  }else{
+    let set = JSON.stringify(history);
+    localStorage.setItem(`CALCULATOR_V1`, set);
   }
 }
 
